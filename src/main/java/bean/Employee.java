@@ -37,4 +37,14 @@ public class Employee {
     public void setGender(Integer gender) {
         this.gender = gender;
     }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", empName='" + empName + '\'' +
+                ", email='" + email + '\'' +
+                ", gender=" + gender +
+                '}';
+    }
 }
