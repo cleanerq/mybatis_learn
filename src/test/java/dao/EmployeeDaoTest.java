@@ -1,7 +1,6 @@
 package dao;
 
 import bean.Employee;
-import junit.framework.TestCase;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -30,12 +29,17 @@ public class EmployeeDaoTest {
         }
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
         // 获取和数据库的一次会话
-        sqlSession = sqlSessionFactory.openSession();
+        // 参数true自动提交
+        sqlSession = sqlSessionFactory.openSession(true);
+        // class com.sun.proxy.$Proxy7 代理对象
         employeeDao = sqlSession.getMapper(EmployeeDao.class);
+
+        System.out.println(employeeDao.getClass());
     }
 
     @After
     public void afterTest() {
+//        sqlSession.commit();
         sqlSession.close();
     }
 
@@ -61,11 +65,15 @@ public class EmployeeDaoTest {
 
     @Test
     public void testInsertEmployee() {
-        Employee employee = new Employee();
-        employee.setEmpName("lisi");
-        employee.setEmail("lisi@qq.com");
-        employee.setGender(1);
-        employeeDao.insertEmployee(employee);
+        try {
+            Employee employee = new Employee();
+            employee.setEmpName("lisi");
+            employee.setEmail("lisi@qq.com");
+            employee.setGender(1);
+            employeeDao.insertEmployee(employee);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Test

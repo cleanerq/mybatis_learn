@@ -3,21 +3,23 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+<!--    1、和spring的context:property-placeholder 引用外部配置文件-->
+<!--    resource是从类路径下面开始引用-->
+<!--    url引用磁盘路径或者网络路径-->
+    <properties resource="dbconfig.properties"></properties>
     <environments default="development">
         <environment id="development">
             <transactionManager type="JDBC"/>
 <!--            配置连接池-->
             <dataSource type="POOLED">
-                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://localhost:3306/test?useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=UTC"/>
-                <property name="username" value="root"/>
-                <property name="password" value="password"/>
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${jdbcurl}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
             </dataSource>
         </environment>
     </environments>
     <mappers>
         <mapper resource="mybatis/EmployeeDao.xml"/>
     </mappers>
-
-
 </configuration>
