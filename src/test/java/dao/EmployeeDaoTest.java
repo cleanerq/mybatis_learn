@@ -70,6 +70,7 @@ public class EmployeeDaoTest {
             employee.setEmpName("lisi");
             employee.setEmail("lisi@qq.com");
             employee.setGender(1);
+            employee.setLoginAccount("dafa");
             employeeDao.insertEmployee(employee);
         } catch (Exception e) {
             e.printStackTrace();
