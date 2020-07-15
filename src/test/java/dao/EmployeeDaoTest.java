@@ -11,13 +11,7 @@ import org.junit.Test;
 import java.io.IOException;
 import java.io.InputStream;
 
-/**
- * @author qby
- * @date 2020/7/15 0:28
- */
-public class EmployeeDaoTest {
-
-
+public class EmployeeDaoTest extends TestCase {
     @Test
     public void testGetEmpById() {
         // 根据全局配置文件创建出一个 SqlSessionFactory
