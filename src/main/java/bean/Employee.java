@@ -5,6 +5,15 @@ public class Employee {
     private String empName;
     private String email;
     private Integer gender;
+    private String loginAccount;
+
+    public String getLoginAccount() {
+        return loginAccount;
+    }
+
+    public void setLoginAccount(String loginAccount) {
+        this.loginAccount = loginAccount;
+    }
 
     public Integer getId() {
         return id;
@@ -45,6 +54,7 @@ public class Employee {
                 ", empName='" + empName + '\'' +
                 ", email='" + email + '\'' +
                 ", gender=" + gender +
+                ", loginAccount='" + loginAccount + '\'' +
                 '}';
     }
 }
