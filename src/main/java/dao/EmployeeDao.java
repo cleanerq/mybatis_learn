@@ -13,4 +13,6 @@ public interface EmployeeDao {
     public int insertEmployee(Employee employee);
 
     public int insertEmployeeFull(Employee employee);
+
+    public Employee getEmpByIdAndEmpName(Integer id, String empName);
 }

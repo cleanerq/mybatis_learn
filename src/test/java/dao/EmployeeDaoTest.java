@@ -100,4 +100,14 @@ public class EmployeeDaoTest {
         }
     }
 
+    @Test
+    public void testGetEmpByIdAndEmpName() {
+        try {
+            Employee empById = employeeDao.getEmpByIdAndEmpName(1, "admin");
+            System.out.println(empById);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

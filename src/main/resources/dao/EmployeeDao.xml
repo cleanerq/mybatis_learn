@@ -10,6 +10,10 @@
         select * from t_employee where id = #{id}
     </select>
 
+    <select id="getEmpByIdAndEmpName" resultType="bean.Employee" >
+        select * from t_employee where id = #{id} and empName = #{empName}
+    </select>
+
 <!--    增删改不用写返回值类型，增删改是影响多少行 mybatis自动判断，如果是数字 int long-->
     <update id="updateEmployee">
         UPDATE t_employee t
