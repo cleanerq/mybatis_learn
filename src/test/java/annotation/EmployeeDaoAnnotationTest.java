@@ -1,6 +1,8 @@
-package dao;
+package annotation;
 
 import bean.Employee;
+import dao.EmployeeDao;
+import junit.framework.TestCase;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -12,8 +14,12 @@ import org.junit.Test;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class EmployeeDaoTest {
-    private EmployeeDao employeeDao;
+/**
+ * @author qby
+ * @date 2020/7/15 23:41
+ */
+public class EmployeeDaoAnnotationTest {
+    private EmployeeDaoAnnotation employeeDao;
     private SqlSession sqlSession;
 
     @Before
@@ -32,7 +38,7 @@ public class EmployeeDaoTest {
         // 参数true自动提交
         sqlSession = sqlSessionFactory.openSession(true);
         // class com.sun.proxy.$Proxy7 代理对象
-        employeeDao = sqlSession.getMapper(EmployeeDao.class);
+        employeeDao = sqlSession.getMapper(EmployeeDaoAnnotation.class);
 
         System.out.println(employeeDao.getClass());
     }
@@ -43,7 +49,6 @@ public class EmployeeDaoTest {
         sqlSession.close();
     }
 
-
     @Test
     public void testGetEmpById() {
         try {
@@ -53,33 +58,4 @@ public class EmployeeDaoTest {
             e.printStackTrace();
         }
     }
-
-    @Test
-    public void testUpdateEmployee() {
-        Employee employee = new Employee();
-        employee.setEmpName("admin123");
-        employee.setId(1);
-        employeeDao.updateEmployee(employee);
-    }
-
-
-    @Test
-    public void testInsertEmployee() {
-        try {
-            Employee employee = new Employee();
-            employee.setEmpName("lisi");
-            employee.setEmail("lisi@qq.com");
-            employee.setGender(1);
-            employee.setLoginAccount("dafa");
-            employeeDao.insertEmployee(employee);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Test
-    public void testDeleteEmployee() {
-        employeeDao.deleteEmployee(2);
-    }
-
 }

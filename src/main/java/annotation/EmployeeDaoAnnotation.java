@@ -23,7 +23,5 @@ public interface EmployeeDaoAnnotation {
     @Delete("delete from t_employee where id = #{id}")
     public boolean deleteEmployee(Integer id);
 
-    @Insert("        insert into t_employee(empname, gender, email)\n" +
-            "        values(#{empName}, #{gender},#{email})")
     public int insertEmployee(Employee employee);
 }

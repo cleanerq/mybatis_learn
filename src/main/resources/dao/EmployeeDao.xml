@@ -29,5 +29,16 @@
         values(#{empName}, #{gender},#{email})
     </insert>
 
+    <!--
+    这个文件中能写的所有标签
+    cache：和缓存有关
+    cache-ref：和缓存有关
+    delete,update,insert,select：增删改查
+        databaseId：指定CRUD属于哪个数据库
+    parameterMap：参数map 废弃的 原本是来做复杂参数映射
+    resultMap：结果映射，自定义结果集的封装规则
+    sql：抽取可重用Sql
+    -->
+
 
 </mapper>
