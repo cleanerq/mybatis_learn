@@ -71,7 +71,9 @@ public class EmployeeDaoTest {
             employee.setEmail("lisi@qq.com");
             employee.setGender(1);
             employee.setLoginAccount("dafa");
-            employeeDao.insertEmployee(employee);
+            int i = employeeDao.insertEmployee(employee);
+            System.out.println(i);
+            System.out.println("ID：" + employee.getId());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -80,6 +82,22 @@ public class EmployeeDaoTest {
     @Test
     public void testDeleteEmployee() {
         employeeDao.deleteEmployee(2);
+    }
+
+    @Test
+    public void testInsertEmployeeFull() {
+        try {
+            Employee employee = new Employee();
+            employee.setEmpName("lisi");
+            employee.setEmail("lisi@qq.com");
+            employee.setGender(1);
+            employee.setLoginAccount("dafa");
+            int i = employeeDao.insertEmployeeFull(employee);
+            System.out.println(i);
+            System.out.println("ID：" + employee.getId());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

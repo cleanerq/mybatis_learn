@@ -24,9 +24,18 @@
         delete from t_employee where id = #{id}
     </delete>
 
-    <insert id="insertEmployee" parameterType="bean.Employee">
+    <insert id="insertEmployee" parameterType="bean.Employee"
+            useGeneratedKeys="true" keyProperty="id">
         insert into t_employee(empname, gender, email)
         values(#{empName}, #{gender},#{email})
+    </insert>
+
+    <insert id="insertEmployeeFull" parameterType="bean.Employee" >
+        <selectKey order="BEFORE" resultType="int" keyProperty="id">
+            select max(id) + 1 from t_employee
+        </selectKey>
+        insert into t_employee(id, empname, gender, email)
+        values(#{id}, #{empName}, #{gender},#{email})
     </insert>
 
     <!--

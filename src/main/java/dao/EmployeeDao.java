@@ -11,4 +11,6 @@ public interface EmployeeDao {
     public boolean deleteEmployee(Integer id);
 
     public int insertEmployee(Employee employee);
+
+    public int insertEmployeeFull(Employee employee);
 }
