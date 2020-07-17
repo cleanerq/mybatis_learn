@@ -12,6 +12,9 @@
         <result column="cName" property="name"></result>
         <result column="cAge" property="age"></result>
         <result column="cgender" property="gender"></result>
+
+
+
     </resultMap>
 
 <!--    resultType 使用的是默认规则-->

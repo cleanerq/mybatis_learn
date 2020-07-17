@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.KeyDao">
+    <select id="getKeyById" resultMap="myMap">
+        SELECT
+            k.id kid,
+            k.keyname,
+            k.lockid,
+            l.id lid,
+            l.lockName
+        FROM
+            t_key k
+        LEFT JOIN t_lock l ON k.lockid = l.id
+        WHERE
+            k.id = #{id}
+    </select>
+
+<!--    1、自定义map使用级联属性-->
+    <resultMap id="myMap" type="bean.Key">
+        <id column="kid" property="id"></id>
+        <result column="keyname" property="keyName"></result>
+        <result column="lockid" property="lockid"></result>
+        <result property="lock.id" column="lid"></result>
+        <result property="lock.lockName" column="lockName"></result>
+    </resultMap>
+</mapper>
