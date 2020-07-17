@@ -1,6 +1,7 @@
 package dao;
 
 import bean.Employee;
+import org.apache.ibatis.annotations.MapKey;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -25,4 +26,9 @@ public interface EmployeeDao {
     public List<Employee> getEmps();
 
     public Map<String, Object> getEmpByIdReturnMap(Integer id);
+
+    // key是员工主键 value是封装好的对象
+    // 把查询的id的值作为key
+    @MapKey("id")
+    public Map<Integer, Employee> getAllEmpsReturnMap();
 }

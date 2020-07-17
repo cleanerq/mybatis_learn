@@ -147,4 +147,15 @@ public class EmployeeDaoTest {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void testGetAllEmpsReturnMap() {
+        try {
+            // 返回map时 列名作为key 值为value
+            Map<Integer, Employee> empById = employeeDao.getAllEmpsReturnMap();
+            System.out.println(empById);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -65,4 +65,10 @@
         select * from t_employee where id = #{id, jdbcType=INTEGER}
     </select>
 
+<!--    查询多个返回一个map-->
+<!--    查询多个情况下 集合里面写元素类型-->
+    <select id="getAllEmpsReturnMap" resultType="bean.Employee" >
+        select * from t_employee
+    </select>
+
 </mapper>
