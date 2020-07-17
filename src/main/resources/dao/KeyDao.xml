@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dao.KeyDao">
-    <select id="getKeyById" resultMap="myMap">
+    <select id="getKeyById" resultMap="myMapAss">
         SELECT
             k.id kid,
             k.keyname,
@@ -24,5 +24,18 @@
         <result column="lockid" property="lockid"></result>
         <result property="lock.id" column="lid"></result>
         <result property="lock.lockName" column="lockName"></result>
+    </resultMap>
+
+<!--    mybatis推荐的 <association property=""></association>-->
+    <resultMap id="myMapAss" type="bean.Key">
+        <id column="kid" property="id"></id>
+        <result column="keyname" property="keyName"></result>
+        <result column="lockid" property="lockid"></result>
+<!--        自定义封装规则 使用association标签 表示联合了一个对象 -->
+          <association property="lock" javaType="bean.Lock">
+<!--            定义lock属性如何封装-->
+            <id property="id" column="lid"></id>
+            <result property="lockName" column="lockname"></result>
+        </association>
     </resultMap>
 </mapper>
