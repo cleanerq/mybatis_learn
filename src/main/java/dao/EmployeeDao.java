@@ -23,4 +23,6 @@ public interface EmployeeDao {
     public Employee getEmpByIdAndEmpNameMap(Map<String, Object> map);
 
     public List<Employee> getEmps();
+
+    public Map<String, Object> getEmpByIdReturnMap(Integer id);
 }
