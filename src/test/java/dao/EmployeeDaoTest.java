@@ -140,7 +140,7 @@ public class EmployeeDaoTest {
     @Test
     public void testGetEmpByIdReturnMap() {
         try {
-            // 列名作为key 值为value
+            // 返回map时 列名作为key 值为value
             Map<String, Object> empById = employeeDao.getEmpByIdReturnMap(1);
             System.out.println(empById);
         } catch (Exception e) {
