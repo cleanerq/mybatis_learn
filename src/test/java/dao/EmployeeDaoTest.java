@@ -11,6 +11,9 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class EmployeeDaoTest {
     private EmployeeDao employeeDao;
@@ -110,4 +113,27 @@ public class EmployeeDaoTest {
         }
     }
 
+    @Test
+    public void testGetEmpByIdAndEmpNameMap() {
+        try {
+            Map<String, Object> map = new HashMap<>();
+            map.put("id", "1");
+            map.put("empName", "admin");
+            map.put("tableName", "t_employee");
+            Employee empById = employeeDao.getEmpByIdAndEmpNameMap(map);
+            System.out.println(empById);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void testGetEmps() {
+        try {
+            List<Employee> list = employeeDao.getEmps();
+            System.out.println(list);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

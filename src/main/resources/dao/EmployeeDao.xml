@@ -7,7 +7,7 @@
 <!--    参数类型不用写-->
 <!--    databaseId="" 匹配数据库名字-->
     <select id="getEmpById" resultType="bean.Employee" >
-        select * from t_employee where id = #{id}
+        select * from t_employee where id = #{id, jdbcType=INTEGER}
     </select>
 
     <select id="getEmpByIdAndEmpName" resultType="bean.Employee" >
@@ -42,6 +42,10 @@
         values(#{id}, #{empName}, #{gender},#{email})
     </insert>
 
+    <select id="getEmpByIdAndEmpNameMap" resultType="bean.Employee" >
+        select * from ${tableName} where id = ${id} and empName = #{empName}
+    </select>
+
     <!--
     这个文件中能写的所有标签
     cache：和缓存有关
@@ -52,6 +56,10 @@
     resultMap：结果映射，自定义结果集的封装规则
     sql：抽取可重用Sql
     -->
+
+    <select id="getEmps" resultType="bean.Employee" >
+        select * from t_employee
+    </select>
 
 
 </mapper>
