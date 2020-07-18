@@ -71,4 +71,25 @@ public class TeacherDaoTest {
         List<Teacher> teacherByInIn = teacherDao.getTeacherByInIn(Arrays.asList(1, 2, 3, 4, 5));
         System.out.println(teacherByInIn);
     }
+
+    @Test
+    public void getTeacherByConditionChoose() {
+        Teacher teacher = new Teacher();
+//        teacher.setId(2);
+//        teacher.setName("%tom%");
+        List<Teacher> teacherByConditionChoose = teacherDao.getTeacherByConditionChoose(teacher);
+        System.out.println(teacherByConditionChoose);
+    }
+
+    @Test
+    public void updateTeacher() {
+        Teacher teacher = new Teacher();
+        teacher.setId(1);
+        teacher.setName("啦啦啦");
+
+        teacherDao.updateTeacher(teacher);
+
+        Teacher teacherById = teacherDao.getTeacherById(1);
+        System.out.println(teacherById);
+    }
 }

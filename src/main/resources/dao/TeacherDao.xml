@@ -54,7 +54,6 @@
                     如果遍历的是一个map
                         index：变量的key
                         item：变量的值
-
             -->
             id in
             <foreach collection="ids" open="("  close=")" index="" item="id_item" separator=",">
@@ -62,5 +61,49 @@
             </foreach>
         </where>
     </select>
+
+    <select id="getTeacherByConditionChoose" resultMap="teacherMap">
+        select *
+        from t_teacher
+        <where>
+            <choose>
+                <when test="id != null and id != ''">
+                    id = #{id}
+                </when>
+                <when test="name != null and name != ''">
+                    teacherName like #{name}
+                </when>
+                <when test="birth != null and birth != ''">
+                   birth_date = #{birth}
+                </when>
+                <otherwise>
+                    1 = 1
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+
+    <update id="updateTeacher">
+        update t_teacher t
+        <set>
+            <if test="name != null">
+                t.teacherName = #{name},
+            </if>
+            <if test="course != null">
+                t.class_name = #{course},
+            </if>
+            <if test="address != null">
+                t.address = #{address},
+            </if>
+            <if test="birth != null">
+                t.birth_date = #{birth},
+            </if>
+        </set>
+        <where>
+         t.id = #{id}
+        </where>
+
+    </update>
+
 
 </mapper>

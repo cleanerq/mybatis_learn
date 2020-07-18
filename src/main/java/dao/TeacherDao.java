@@ -16,4 +16,8 @@ public interface TeacherDao {
     public List<Teacher> getTeacherByCondition(Teacher bean);
 
     public List<Teacher> getTeacherByInIn(@Param("ids") List<Integer> idList);
+
+    public List<Teacher> getTeacherByConditionChoose(Teacher bean);
+
+    public int updateTeacher(Teacher teacher);
 }
