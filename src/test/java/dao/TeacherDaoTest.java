@@ -11,6 +11,8 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -52,5 +54,21 @@ public class TeacherDaoTest {
     public void getTeacherById() {
         Teacher teacherById = teacherDao.getTeacherById(1);
         System.out.println(teacherById);
+    }
+
+    @Test
+    public void getTeacherByCondition() {
+
+        Teacher teacher = new Teacher();
+//        teacher.setId(2);
+        teacher.setName("%tom%");
+        List<Teacher> teacherByCondition = teacherDao.getTeacherByCondition(teacher);
+        System.out.println(teacherByCondition);
+    }
+
+    @Test
+    public void getTeacherByInIn() {
+        List<Teacher> teacherByInIn = teacherDao.getTeacherByInIn(Arrays.asList(1, 2, 3, 4, 5));
+        System.out.println(teacherByInIn);
     }
 }

@@ -14,5 +14,53 @@
         select * from t_teacher where id = #{id}
     </select>
 
+    <select id="getTeacherByCondition" resultMap="teacherMap">
+        select *
+        from t_teacher
+        <!--
+        prefix 前缀：为我们下面的SQL整体添加一个前缀
+        prefixOverrides=""：去除整体字符串前面多余的字符
+        suffix 为整体添加后缀
+        suffixOverrides=""：后面哪个多了可以去掉
+        我们的查询条件放在 where标签中 每一个and写在前面 where帮我们自动去除前面多余的and
+        -->
+        <trim prefix="where" prefixOverrides="and" suffix="" suffixOverrides="and">
+            <if test="id != null and id != ''">
+                 id = #{id} and
+            </if>
+            <if test="name != null">
+                 teacherName like #{name} and
+            </if>
+            <if test="birth != null">
+                 birth_date > #{birth} and
+            </if>
+        </trim>
+    </select>
+
+    <select id="getTeacherByInIn" resultMap="teacherMap">
+        select *
+        from t_teacher
+        <where>
+            <!--
+                collection：要遍历的集合
+                separator：遍历元素的分隔符
+                open：以什么开始
+                close：以什么结束
+                item：遍历元素的别名 方便引用
+                index：
+                    如果遍历的是一个list，
+                        index：指定的变量保存索引
+                        item：当前遍历的元素的值
+                    如果遍历的是一个map
+                        index：变量的key
+                        item：变量的值
+
+            -->
+            id in
+            <foreach collection="ids" open="("  close=")" index="" item="id_item" separator=",">
+                #{id_item}
+            </foreach>
+        </where>
+    </select>
 
 </mapper>

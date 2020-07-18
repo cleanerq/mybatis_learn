@@ -1,6 +1,9 @@
 package dao;
 
 import bean.Teacher;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * @author qby
@@ -10,5 +13,7 @@ public interface TeacherDao {
 
     public Teacher getTeacherById(Integer id);
 
+    public List<Teacher> getTeacherByCondition(Teacher bean);
 
+    public List<Teacher> getTeacherByInIn(@Param("ids") List<Integer> idList);
 }
