@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.LockDao">
+
+    <select id="getLockById" resultMap="myMap">
+        SELECT
+            l.id lid,
+            l.lockName,
+            k.id kid,
+            k.keyname,
+            k.lockid
+        FROM
+            t_lock l
+        LEFT JOIN t_key k ON k.lockid = l.id
+        WHERE
+            l.id = #{id}
+    </select>
+
+    <resultMap id="myMap" type="bean.Lock">
+        <id property="id" column="lid"></id>
+        <result property="lockName" column="lockName"></result>
+        <collection property="keys" ofType="bean.Key">
+            <id property="id" column="kid"></id>
+            <result property="keyName" column="keyname"></result>
+            <result property="lockid" column="lockid"></result>
+        </collection>
+    </resultMap>
+
+</mapper>
