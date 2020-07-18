@@ -38,4 +38,24 @@
             <result property="lockName" column="lockname"></result>
         </association>
     </resultMap>
+
+    <select id="getKeyByIdSimple" resultMap="simpleMap">
+        select * from t_key where id = #{id}
+    </select>
+
+    <resultMap id="simpleMap" type="bean.Key">
+        <id column="kid" property="id"></id>
+        <result column="keyname" property="keyName"></result>
+        <result column="lockid" property="lockid"></result>
+<!--        告诉mybatis自己去调用一个查询查锁表 select 指定一个查询sql的唯一标识 -->
+<!--        mybatis自动调用指定的sql将查出的lock封装进来-->
+<!--        colume 指定将哪一列传过去-->
+        <association property="lock"
+                     column="lockid" select="dao.LockDao.getLockByIdSimple"
+                     fetchType="eager"></association>
+    </resultMap>
+
+    <select id="getKeysByLockId" resultType="bean.Key">
+        select * from t_key where lockid = #{lockid}
+    </select>
 </mapper>

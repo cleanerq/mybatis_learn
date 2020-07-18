@@ -9,4 +9,8 @@ import bean.Lock;
 public interface LockDao {
     // 查询锁的时候将所有钥匙查询出来
     public Lock getLockById(Integer id);
+
+    public Lock getLockByIdSimple(Integer id);
+
+    public Lock getLockByStep(Integer id);
 }

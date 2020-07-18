@@ -1,7 +1,6 @@
 package dao;
 
-import bean.Key;
-import bean.Lock;
+import bean.Teacher;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -12,17 +11,15 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
 
 import static org.junit.Assert.*;
 
 /**
  * @author qby
- * @date 2020/7/18 15:47
+ * @date 2020/7/18 17:43
  */
-public class LockDaoTest {
-
-    private LockDao lockDao;
+public class TeacherDaoTest {
+    private TeacherDao teacherDao;
     private SqlSession sqlSession;
 
     @Before
@@ -41,9 +38,9 @@ public class LockDaoTest {
         // 参数true自动提交
         sqlSession = sqlSessionFactory.openSession(true);
         // class com.sun.proxy.$Proxy7 代理对象
-        lockDao = sqlSession.getMapper(LockDao.class);
+        teacherDao = sqlSession.getMapper(TeacherDao.class);
 
-        System.out.println(lockDao.getClass());
+        System.out.println(teacherDao.getClass());
     }
 
     @After
@@ -51,26 +48,9 @@ public class LockDaoTest {
 //        sqlSession.commit();
         sqlSession.close();
     }
-
     @Test
-    public void getLockById() {
-        Lock lockById = lockDao.getLockById(3);
-        System.out.println(lockById);
-
-        lockById.getKeys().forEach(key -> {
-            System.out.println(key);
-        });
-    }
-
-    @Test
-    public void getLockByStep() {
-        Lock lockByStep = lockDao.getLockByStep(3);
-        System.out.println(lockByStep.getLockName());
-
-        List<Key> keys = lockByStep.getKeys();
-        keys.forEach(key -> {
-            System.out.println(key);
-        });
-
+    public void getTeacherById() {
+        Teacher teacherById = teacherDao.getTeacherById(1);
+        System.out.println(teacherById);
     }
 }

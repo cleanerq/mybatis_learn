@@ -51,4 +51,11 @@ public class KeyDaoTest {
         Key keyById = keyDao.getKeyById(1);
         System.out.println(keyById);
     }
+
+    @Test
+    public void getKeyByIdSimple() {
+
+        Key keyByIdSimple = keyDao.getKeyByIdSimple(1);
+        System.out.println(keyByIdSimple.getKeyName());
+    }
 }

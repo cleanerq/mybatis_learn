@@ -28,4 +28,21 @@
         </collection>
     </resultMap>
 
+    <select id="getLockByIdSimple" resultType="bean.Lock">
+        select * from t_lock where id = #{id}
+    </select>
+
+    <select id="getLockByStep" resultMap="myMapStep">
+         select * from t_lock where id = #{id}
+    </select>
+
+    <resultMap id="myMapStep" type="bean.Lock">
+        <id property="id" column="id"></id>
+        <result property="lockName" column="lockName"></result>
+<!--        指定集合属性类型集合-->
+        <collection property="keys"
+                    select="dao.KeyDao.getKeysByLockId"
+                    column="id" >
+        </collection>
+    </resultMap>
 </mapper>

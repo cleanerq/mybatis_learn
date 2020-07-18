@@ -11,6 +11,11 @@
     <settings>
 <!--     2、   是否开启驼峰命名自动映射，即从经典数据库列名 A_COLUMN 映射到经典 Java 属性名 aColumn-->
         <setting name="mapUnderscoreToCamelCase" value="true"/>
+<!--        延迟加载的全局开关。当开启时，所有关联对象都会延迟加载。 特定关联关系中可通过设置 fetchType 属性来覆盖该项的开关状态。-->
+<!--        开启延迟加载开关-->
+        <setting name="lazyLoadingEnabled" value="true"/>
+<!--        开启属性按需加载-->
+        <setting name="aggressiveLazyLoading" value="false"/>
     </settings>
 <!--    3、类别名 为常用的javabean 起别名 别名默认就是类名 不区分大小写-->
 <!--    <typeAliases>-->
