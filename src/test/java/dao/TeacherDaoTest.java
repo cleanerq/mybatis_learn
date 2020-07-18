@@ -76,7 +76,7 @@ public class TeacherDaoTest {
     public void getTeacherByConditionChoose() {
         Teacher teacher = new Teacher();
 //        teacher.setId(2);
-//        teacher.setName("%tom%");
+//        teacher.setName("tom");
         List<Teacher> teacherByConditionChoose = teacherDao.getTeacherByConditionChoose(teacher);
         System.out.println(teacherByConditionChoose);
     }

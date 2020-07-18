@@ -63,15 +63,19 @@
     </select>
 
     <select id="getTeacherByConditionChoose" resultMap="teacherMap">
-        select *
-        from t_teacher
+
+
+        <include refid="selectSql"></include>
         <where>
             <choose>
                 <when test="id != null and id != ''">
                     id = #{id}
                 </when>
+
                 <when test="name != null and name != ''">
-                    teacherName like #{name}
+                    <!-- 绑定一个表达式的值到一个变量-->
+                    <bind value="'%'+name+'%'" name="_name"></bind>
+                    teacherName like #{_name}
                 </when>
                 <when test="birth != null and birth != ''">
                    birth_date = #{birth}
@@ -105,5 +109,7 @@
 
     </update>
 
+<!--    用来抽取SQL用-->
+    <sql id="selectSql">select  * from t_teacher</sql>
 
 </mapper>
