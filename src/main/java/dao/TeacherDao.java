@@ -10,7 +10,6 @@ import java.util.List;
  * @author qby
  * @date 2020/7/18 17:39
  */
-@Repository
 public interface TeacherDao {
 
     public Teacher getTeacherById(Integer id);
