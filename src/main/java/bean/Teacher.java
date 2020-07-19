@@ -2,6 +2,7 @@ package bean;
 
 import org.omg.CosNaming.NamingContextExtPackage.StringNameHelper;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**

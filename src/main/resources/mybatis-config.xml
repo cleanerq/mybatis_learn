@@ -16,6 +16,8 @@
         <setting name="lazyLoadingEnabled" value="true"/>
 <!--        开启属性按需加载-->
         <setting name="aggressiveLazyLoading" value="false"/>
+<!--        全局性地开启或关闭所有映射器配置文件中已配置的任何缓存-->
+        <setting name="cacheEnabled" value="true"/>
     </settings>
 <!--    3、类别名 为常用的javabean 起别名 别名默认就是类名 不区分大小写-->
 <!--    <typeAliases>-->

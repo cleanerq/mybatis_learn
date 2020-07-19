@@ -23,6 +23,7 @@ import static org.junit.Assert.*;
 public class TeacherDaoTest {
     private TeacherDao teacherDao;
     private SqlSession sqlSession;
+    private SqlSessionFactory sqlSessionFactory;
 
     @Before
     public void beforeTest() {
@@ -35,7 +36,7 @@ public class TeacherDaoTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+        sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
         // 获取和数据库的一次会话
         // 参数true自动提交
         sqlSession = sqlSessionFactory.openSession(true);
@@ -52,8 +53,13 @@ public class TeacherDaoTest {
     }
     @Test
     public void getTeacherById() {
-        Teacher teacherById = teacherDao.getTeacherById(1);
-        System.out.println(teacherById);
+        Teacher teacherById1 = teacherDao.getTeacherById(1);
+        System.out.println(teacherById1);
+
+        Teacher teacherById2 = teacherDao.getTeacherById(1);
+        System.out.println(teacherById2);
+
+        System.out.println(teacherById1 == teacherById2);
     }
 
     @Test
@@ -91,5 +97,59 @@ public class TeacherDaoTest {
 
         Teacher teacherById = teacherDao.getTeacherById(1);
         System.out.println(teacherById);
+    }
+
+    @Test
+    public void test03() {
+        Teacher teacherById1 = teacherDao.getTeacherById(1);
+        System.out.println(teacherById1);
+
+//        Teacher teacher = new Teacher();
+//        teacher.setId(3);
+//        teacher.setName("啦啦啦");
+//
+//        teacherDao.updateTeacher(teacher);
+
+        Teacher teacherById2 = teacherDao.getTeacherById(1);
+        System.out.println(teacherById2);
+
+        System.out.println(teacherById1 == teacherById2);
+    }
+
+    @Test
+    public void test04() {
+
+        // 参数true自动提交
+        SqlSession sqlSession1 = sqlSessionFactory.openSession(true);
+        SqlSession sqlSession2 = sqlSessionFactory.openSession(true);
+
+
+        TeacherDao teacherDao1 = sqlSession1.getMapper(TeacherDao.class);
+        Teacher teacherById1 = teacherDao1.getTeacherById(1);
+        sqlSession1.close();
+        System.out.println(teacherById1);
+
+        TeacherDao teacherDao2 = sqlSession2.getMapper(TeacherDao.class);
+        Teacher teacherById2 = teacherDao2.getTeacherById(1);
+
+        System.out.println(teacherById2);
+
+        sqlSession2.close();
+        // 参数true自动提交
+        SqlSession sqlSession3 = sqlSessionFactory.openSession(true);
+        TeacherDao teacherDao3 = sqlSession3.getMapper(TeacherDao.class);
+        Teacher teacherById3 = teacherDao3.getTeacherById(1);
+
+        Teacher teacherById = teacherDao3.getTeacherById(2);
+        Teacher teacherById4 = teacherDao3.getTeacherById(2);
+
+        System.out.println(teacherById);
+        System.out.println(teacherById4);
+
+        sqlSession3.close();
+
+
+
+
     }
 }
