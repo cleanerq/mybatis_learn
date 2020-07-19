@@ -14,8 +14,6 @@ import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.Assert.*;
-
 /**
  * @author qby
  * @date 2020/7/18 17:43
@@ -32,7 +30,7 @@ public class TeacherDaoTest {
         // SqlSession sql会话 代表和数据库的一次会话
         InputStream inputStream = null;
         try {
-            inputStream = Resources.getResourceAsStream("mybatis-config.xml");
+            inputStream = Resources.getResourceAsStream("mybatis/mybatis-config.xml");
         } catch (IOException e) {
             e.printStackTrace();
         }

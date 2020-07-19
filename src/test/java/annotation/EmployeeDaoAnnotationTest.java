@@ -1,8 +1,6 @@
 package annotation;
 
 import bean.Employee;
-import dao.EmployeeDao;
-import junit.framework.TestCase;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -29,7 +27,7 @@ public class EmployeeDaoAnnotationTest {
         // SqlSession sql会话 代表和数据库的一次会话
         InputStream inputStream = null;
         try {
-            inputStream = Resources.getResourceAsStream("mybatis-config.xml");
+            inputStream = Resources.getResourceAsStream("mybatis/mybatis-config.xml");
         } catch (IOException e) {
             e.printStackTrace();
         }

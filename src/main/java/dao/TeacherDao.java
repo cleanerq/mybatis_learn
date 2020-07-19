@@ -2,6 +2,7 @@ package dao;
 
 import bean.Teacher;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -9,6 +10,7 @@ import java.util.List;
  * @author qby
  * @date 2020/7/18 17:39
  */
+@Repository
 public interface TeacherDao {
 
     public Teacher getTeacherById(Integer id);
