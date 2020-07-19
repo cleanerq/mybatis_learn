@@ -9,7 +9,7 @@ import java.util.Date;
  * @author qby
  * @date 2020/7/18 17:38
  */
-public class Teacher {
+public class Teacher implements Serializable {
     private Integer id;
     private String name;
     private String course;
