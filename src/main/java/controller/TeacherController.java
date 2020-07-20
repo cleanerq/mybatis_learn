@@ -34,8 +34,9 @@ public class TeacherController {
 
         PageHelper.startPage(pageNum, 5);
         List<Teacher> teaAll = teacherService.getTeaAll();
-        // 将查询的结果放在pageInfo中
-        PageInfo<Teacher> info = new PageInfo<>(teaAll);
+        // 将查询的结果放在pageInfo中 查询结果是第一个参数
+        // 第二个参数传入连续要显示的页码
+        PageInfo<Teacher> info = new PageInfo<>(teaAll, 6);
 
         System.out.println(info.getPageNum());
         System.out.println(info.getPages());
@@ -44,6 +45,8 @@ public class TeacherController {
         System.out.println(info.getPages());
         System.out.println(info.getPrePage());
         System.out.println(info.getNextPage());
+        // 连续分页的页数
+        System.out.println(info.getNavigatepageNums());
 
         model.addAttribute("info", info);
 

@@ -28,7 +28,16 @@
             <td colspan="4">
                 <a href="${pageContext.servletContext.contextPath}/getTeaAll?pn=1">首页</a>
                 <a href="${pageContext.servletContext.contextPath}/getTeaAll?pn=${info.prePage}">上一页</a>
-                当前页${info.pageNum}
+
+                <c:forEach items="${info.navigatepageNums}" var="item">
+                    <c:if test="${item == info.pageNum}">
+                        【${item}】
+                    </c:if>
+                    <c:if test="${item != info.pageNum}">
+                        <a href="${pageContext.servletContext.contextPath}/getTeaAll?pn=${item}">${item}</a>
+                    </c:if>
+                </c:forEach>
+
                 <a href="${pageContext.servletContext.contextPath}/getTeaAll?pn=${info.nextPage}">下一页</a>
                 <a href="${pageContext.servletContext.contextPath}/getTeaAll?pn=${info.pages}">末页</a>
             </td>
