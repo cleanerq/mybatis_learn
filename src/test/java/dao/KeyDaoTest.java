@@ -12,8 +12,6 @@ import org.junit.Test;
 import java.io.IOException;
 import java.io.InputStream;
 
-import static org.junit.Assert.*;
-
 public class KeyDaoTest {
 
     private KeyDao keyDao;
@@ -26,7 +24,7 @@ public class KeyDaoTest {
         // SqlSession sql会话 代表和数据库的一次会话
         InputStream inputStream = null;
         try {
-            inputStream = Resources.getResourceAsStream("mybatis-config.xml");
+            inputStream = Resources.getResourceAsStream("mybatis/mybatis-config.xml");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -50,5 +48,12 @@ public class KeyDaoTest {
     public void getKeyById() {
         Key keyById = keyDao.getKeyById(1);
         System.out.println(keyById);
+    }
+
+    @Test
+    public void getKeyByIdSimple() {
+
+        Key keyByIdSimple = keyDao.getKeyByIdSimple(1);
+        System.out.println(keyByIdSimple.getKeyName());
     }
 }

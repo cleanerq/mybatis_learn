@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.TeacherDao">
+    <cache type="org.mybatis.caches.ehcache.EhcacheCache"></cache>
+    <resultMap id="teacherMap" type="bean.Teacher">
+        <id property="id" column="id"></id>
+        <result property="address" column="address"></result>
+        <result property="course" column="class_name"></result>
+        <result property="birth" column="birth_date"></result>
+        <result property="name" column="teacherName"></result>
+    </resultMap>
+    <select id="getTeacherById" resultMap="teacherMap">
+        select * from t_teacher where id = #{id}
+    </select>
+
+    <select id="getTeacherByCondition" resultMap="teacherMap" >
+        select *
+        from t_teacher
+        <!--
+        prefix 前缀：为我们下面的SQL整体添加一个前缀
+        prefixOverrides=""：去除整体字符串前面多余的字符
+        suffix 为整体添加后缀
+        suffixOverrides=""：后面哪个多了可以去掉
+        我们的查询条件放在 where标签中 每一个and写在前面 where帮我们自动去除前面多余的and
+        -->
+        <trim prefix="where" prefixOverrides="and" suffix="" suffixOverrides="and">
+            <if test="id != null and id != ''">
+                 id = #{id} and
+            </if>
+            <if test="name != null">
+                 teacherName like #{name} and
+            </if>
+            <if test="birth != null">
+                 birth_date > #{birth} and
+            </if>
+        </trim>
+    </select>
+
+    <select id="getTeacherByInIn" resultMap="teacherMap">
+        select *
+        from t_teacher
+        <where>
+            <!--
+                collection：要遍历的集合
+                separator：遍历元素的分隔符
+                open：以什么开始
+                close：以什么结束
+                item：遍历元素的别名 方便引用
+                index：
+                    如果遍历的是一个list，
+                        index：指定的变量保存索引
+                        item：当前遍历的元素的值
+                    如果遍历的是一个map
+                        index：变量的key
+                        item：变量的值
+            -->
+            id in
+            <foreach collection="ids" open="("  close=")" index="" item="id_item" separator=",">
+                #{id_item}
+            </foreach>
+        </where>
+    </select>
+
+    <select id="getTeacherByConditionChoose" resultMap="teacherMap">
+
+
+        <include refid="selectSql"></include>
+        <where>
+            <choose>
+                <when test="id != null and id != ''">
+                    id = #{id}
+                </when>
+
+                <when test="name != null and name != ''">
+                    <!-- 绑定一个表达式的值到一个变量-->
+                    <bind value="'%'+name+'%'" name="_name"></bind>
+                    teacherName like #{_name}
+                </when>
+                <when test="birth != null and birth != ''">
+                   birth_date = #{birth}
+                </when>
+                <otherwise>
+                    1 = 1
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+
+    <update id="updateTeacher" flushCache="true">
+        update t_teacher t
+        <set>
+            <if test="name != null">
+                t.teacherName = #{name},
+            </if>
+            <if test="course != null">
+                t.class_name = #{course},
+            </if>
+            <if test="address != null">
+                t.address = #{address},
+            </if>
+            <if test="birth != null">
+                t.birth_date = #{birth},
+            </if>
+        </set>
+        <where>
+         t.id = #{id}
+        </where>
+
+    </update>
+
+<!--    用来抽取SQL用-->
+    <sql id="selectSql">select  * from t_teacher</sql>
+
+</mapper>

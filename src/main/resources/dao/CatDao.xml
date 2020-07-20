@@ -3,7 +3,6 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dao.CatDao">
-
     <resultMap id="catResultMap" type="bean.Cat">
 <!--        指定主键列的对应规则-->
 <!--        id：指定哪一列是主键列-->

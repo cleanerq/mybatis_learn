@@ -2,6 +2,8 @@ package dao;
 
 import bean.Key;
 
+import java.util.List;
+
 public interface KeyDao {
 
     /**
@@ -10,4 +12,8 @@ public interface KeyDao {
      * @return
      */
     public Key getKeyById(Integer id);
+
+    public Key getKeyByIdSimple(Integer id);
+
+    public List<Key> getKeysByLockId(Integer id);
 }
