@@ -23,4 +23,6 @@ public interface TeacherDao {
     public int updateTeacher(Teacher teacher);
 
     public void insertBatch(@Param("teachers") List<Teacher> list);
+
+    public List<Teacher> getTeachers();
 }

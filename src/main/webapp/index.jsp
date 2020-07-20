@@ -12,5 +12,6 @@
 </head>
 <body>
 <a href="${pageContext.servletContext.contextPath}/getTea?integer=1">查询老师</a>
+<a href="${pageContext.servletContext.contextPath}/getTeaAll">查询所有老师</a>
 </body>
 </html>

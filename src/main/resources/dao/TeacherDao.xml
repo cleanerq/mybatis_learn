@@ -120,4 +120,8 @@
             (#{tea.name}, #{tea.course})
         </foreach>
     </insert>
+
+    <select id="getTeachers" resultMap="teacherMap">
+        select * from t_teacher
+    </select>
 </mapper>
