@@ -21,4 +21,6 @@ public interface TeacherDao {
     public List<Teacher> getTeacherByConditionChoose(Teacher bean);
 
     public int updateTeacher(Teacher teacher);
+
+    public void insertBatch(@Param("teachers") List<Teacher> list);
 }

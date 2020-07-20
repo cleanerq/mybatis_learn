@@ -113,4 +113,11 @@
 <!--    用来抽取SQL用-->
     <sql id="selectSql">select  * from t_teacher</sql>
 
+    <insert id="insertBatch">
+        insert into t_teacher(teacherName, class_name)
+        values
+        <foreach collection="teachers"  separator="," item="tea">
+            (#{tea.name}, #{tea.course})
+        </foreach>
+    </insert>
 </mapper>

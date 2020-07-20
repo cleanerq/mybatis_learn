@@ -4,6 +4,8 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 
+
+
 <!--    1、和spring的context:property-placeholder 引用外部配置文件-->
 <!--    resource是从类路径下面开始引用-->
 <!--    url引用磁盘路径或者网络路径-->
@@ -75,5 +77,9 @@
 <!--        <package name="dao"/>-->
 <!--    </mappers>-->
 
-
+    <plugins>
+        <!-- com.github.pagehelper为PageHelper类所在包名 -->
+        <plugin interceptor="com.github.pagehelper.PageInterceptor">
+        </plugin>
+    </plugins>
 </configuration>

@@ -11,8 +11,10 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @author qby
@@ -30,7 +32,7 @@ public class TeacherDaoTest {
         // SqlSession sql会话 代表和数据库的一次会话
         InputStream inputStream = null;
         try {
-            inputStream = Resources.getResourceAsStream("mybatis/mybatis-config.xml");
+            inputStream = Resources.getResourceAsStream("mybatis/mybatis-config-test.xml");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -149,5 +151,17 @@ public class TeacherDaoTest {
 
 
 
+    }
+
+    @Test
+    public void insertBatch() {
+        List<Teacher> list = new ArrayList<Teacher>();
+        for (int i = 0; i < 1000; i++) {
+            Teacher teacher = new Teacher();
+            teacher.setName(UUID.randomUUID().toString().substring(0, 5));
+            teacher.setCourse(UUID.randomUUID().toString().substring(0, 5));
+            list.add(teacher);
+        }
+        teacherDao.insertBatch(list);
     }
 }

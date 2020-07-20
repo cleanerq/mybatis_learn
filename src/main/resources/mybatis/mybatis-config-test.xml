@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+<!--    1、和spring的context:property-placeholder 引用外部配置文件-->
+<!--    resource是从类路径下面开始引用-->
+<!--    url引用磁盘路径或者网络路径-->
+    <properties resource="dbconfig.properties"></properties>
+    <settings>
+<!--     2、   是否开启驼峰命名自动映射，即从经典数据库列名 A_COLUMN 映射到经典 Java 属性名 aColumn-->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+<!--        延迟加载的全局开关。当开启时，所有关联对象都会延迟加载。 特定关联关系中可通过设置 fetchType 属性来覆盖该项的开关状态。-->
+<!--        开启延迟加载开关-->
+        <setting name="lazyLoadingEnabled" value="true"/>
+<!--        开启属性按需加载-->
+        <setting name="aggressiveLazyLoading" value="false"/>
+<!--        全局性地开启或关闭所有映射器配置文件中已配置的任何缓存-->
+        <setting name="cacheEnabled" value="true"/>
+    </settings>
+<!--    3、类别名 为常用的javabean 起别名 别名默认就是类名 不区分大小写-->
+    <typeAliases>
+<!--        <typeAlias type="bean.Employee"></typeAlias>-->
+<!--        批量起别名 指定包名 默认别名是类名 不区分大小写-->
+        <package name="bean"/>
+    </typeAliases>
+    <plugins>
+        <!-- com.github.pagehelper为PageHelper类所在包名 -->
+        <plugin interceptor="com.github.pagehelper.PageInterceptor">
+        </plugin>
+    </plugins>
+<!--    environment 配置一个具体的环境 都需要事物管理器 和一个数据源-->
+<!--    数据源 和事物管理都用spirng 实际不需要配置-->
+    <environments default="development">
+<!--        id是环境的唯一标识-->
+<!--        <environment id="testEnv">-->
+<!--            <transactionManager type=""></transactionManager>-->
+<!--            <dataSource type="">-->
+<!--                <property name="driver" value="${driver}"/>-->
+<!--                <property name="url" value="${jdbcurl}"/>-->
+<!--                <property name="username" value="${username}"/>-->
+<!--                <property name="password" value="${password}"/>-->
+<!--            </dataSource>-->
+<!--        </environment>-->
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+<!--            配置连接池-->
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${jdbcurl}"/>
+                <property name="username" value="${user}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+<!--    databaseIdProvider是考虑数据库移植用的 一般不用-->
+    <databaseIdProvider type="DB_VENDOR">
+<!--        name 数据库厂商标识 name 好记的名字-->
+        <property name="SQL Server" value="sqlserver"/>
+        <property name="DB2" value="db2"/>
+        <property name="Oracle" value="oracle" />
+    </databaseIdProvider>
+
+<!--写好的SQl映射文件 使用mapper 注册进来-->
+    <mappers>
+<!--        resource：是在类路径下面找SQL映射文件 -->
+<!--        url：可以磁盘或网络路径 -->
+<!--        class：直接引用接口的全类名 要将xml和接口放在同一包名下面 而且接口名和xml文件名必须一样 -->
+
+<!--        <mapper resource="mybatis/EmployeeDao.xml"/>-->
+
+        <!--        class的另一种用法：使用注解版-->
+<!--        <mapper class="annotation.EmployeeDaoAnnotation"></mapper>-->
+
+<!--        批量注册-->
+        <package name="annotation"/>
+        <package name="dao"/>
+    </mappers>
+
+
+</configuration>
